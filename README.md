@@ -105,11 +105,16 @@ This is the design detail worth pointing out to judges: **KineticAge models a re
 
 ```mermaid
 graph TD
-    Client[React Client SPA] <-->|JSON Requests / JWT Header| API[Express Router API]
-    API <-->|Route Protection Guard| Auth[Auth Middleware]
-    API <-->|Controller Router Routing| Controller[Route Controllers]
-    Controller <-->|Mongoose Schemas| Models[MongoDB Models]
-    Models <-->|Read / Write Transactions| DB[(MongoDB database)]
+    Client[React Client SPA] -->|JSON Request + JWT Header| API[Express Router API]
+    API -->|JSON Response| Client
+    API --> Auth[Auth Middleware]
+    Auth -->|Route Protection Guard| API
+    API --> Controller[Route Controllers]
+    Controller -->|Controller Routing| API
+    Controller --> Models[Mongoose Models]
+    Models -->|Query Results| Controller
+    Models --> DB[(MongoDB Database)]
+    DB -->|Read / Write Transactions| Models
 ```
 
 ### Cascading Update Flow (the part worth demoing live)
