@@ -1,0 +1,123 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "./styles/globals.css";
+
+:root {
+  --bg-primary: #fafafa;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-sidebar: rgba(250, 250, 250, 0.95);
+  --bg-navbar: rgba(255, 255, 255, 0.85);
+  --bg-input: #ffffff;
+  --border-color: #e4e4e7;
+  --border-input: #d4d4d8;
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
+  --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  --table-header-bg: #f4f4f5;
+  --table-row-hover: #f1f5f9;
+}
+
+.dark {
+  --bg-primary: #09090b;
+  --bg-card: rgba(24, 24, 27, 0.65);
+  --bg-sidebar: rgba(9, 9, 11, 0.85);
+  --bg-navbar: rgba(9, 9, 11, 0.75);
+  --bg-input: rgba(24, 24, 27, 0.8);
+  --border-color: #27272a;
+  --border-input: #3f3f46;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --table-header-bg: rgba(39, 39, 42, 0.4);
+  --table-row-hover: rgba(39, 39, 42, 0.6);
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Active press feedback on buttons and anchor tags for native tactile sensation */
+  button:active, 
+  a:active, 
+  [role="button"]:active {
+    transform: scale(0.97);
+  }
+
+  /* Glassmorphism base setup */
+  .bg-theme-card, .bg-theme-sidebar, .bg-theme-navbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Custom Page transition keyframe animations (Subtle slide and fade) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-transition {
+  animation: fadeInUp 280ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Modal Entry Backdrop and Content Keyframes */
+@keyframes modalOverlayFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalBoxScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal-overlay {
+  animation: modalOverlayFade 200ms ease-out forwards;
+}
+
+.animate-modal-box {
+  animation: modalBoxScale 250ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Global utility classes mapping CSS variables */
+.bg-theme-primary { background-color: var(--bg-primary); }
+.bg-theme-card { background-color: var(--bg-card); }
+.bg-theme-sidebar { background-color: var(--bg-sidebar); }
+.bg-theme-navbar { background-color: var(--bg-navbar); }
+.bg-theme-input { background-color: var(--bg-input); }
+
+.border-theme { border-color: var(--border-color); }
+.border-theme-input { border-color: var(--border-input); }
+
+.text-theme-primary { color: var(--text-primary); }
+.text-theme-secondary { color: var(--text-secondary); }
+.text-theme-muted { color: var(--text-muted); }
+
+.shadow-theme-card { box-shadow: var(--shadow-card); }
+.bg-theme-table-header { background-color: var(--table-header-bg); }
+.hover-bg-theme-table-row:hover { background-color: var(--table-row-hover); }
+
+/* Class utility for theme transition animations */
+.transition-theme {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}

@@ -1,0 +1,9 @@
+/* Globals stylesheet overrides and animations */
+
+@layer utilities {
+  .glassmorphism {
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
