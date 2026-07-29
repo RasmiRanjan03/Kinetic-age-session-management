@@ -328,7 +328,7 @@ Transactions ledger tracking subscription payments.
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- MongoDB running locally, or a MongoDB Atlas connection URI
+- A MongoDB Atlas cluster (free-tier M0 works fine) — create one at [cloud.mongodb.com](https://cloud.mongodb.com), whitelist your IP (or `0.0.0.0/0` for local dev), and grab your connection string
 
 ### Step-by-Step Installation
 
@@ -346,11 +346,12 @@ npm run install:all
 **3. Configure environment variables** — create a `.env` file in `backend/`:
 ```env
 PORT=5001
-MONGO_URI=mongodb://localhost:27017/kineticage
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/kineticage?retryWrites=true&w=majority
 JWT_SECRET=your_jwt_signing_secret_phrase
 CLIENT_URL=http://localhost:5173
 NODE_ENV=development
 ```
+> Replace `<username>`, `<password>`, and `<cluster-name>` with your MongoDB Atlas cluster credentials. Never commit this file — `.env` should be listed in `.gitignore`.
 
 **4. Seed the database** — on first run with empty collections, the backend automatically seeds sample senior wellness records (clients, subscriptions, payments, sessions).
 
